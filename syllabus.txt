@@ -1,384 +1,239 @@
-11 ORGANIC CHEMISTRY
-Preamble
-Although there are features of organic chemistry topics that are distinctive, it is intended that appropriate cross-
-references with other sections/topics in the syllabus should be made.
-In their study of organic chemistry, candidates may wish to group the organic reactions in terms of the
-mechanisms in the syllabus where possible. Candidates may wish to compare and contrast the different
-mechanisms.
-When describing preparative reactions, candidates will be expected to quote the reagents, e.g. aqueous NaOH,
-the essential practical conditions, e.g. reflux, high temperature and pressure, and the identity of each of the
-major products. Detailed conditions involving specific temperature and pressure values are not required.
-Detailed knowledge of practical procedures is also not required: however, candidates may be expected to
-suggest (from their knowledge of the reagents, essential conditions and products) what steps may be needed to
-purify/extract a required product from the reaction mixture. In equations for organic redox reactions, the symbols
-[O] and [H] are acceptable.
-11.1 INTRODUCTION
-Content
-• Empirical, molecular and structural formulae
-• Functional groups and the naming of organic compounds
-• Shapes of organic molecules; σ and π bonds
-Candidates are expected to be able to interpret and use the following types of representations in the description
-of organic molecules. The examples given are for the compound (+)-lactic acid.
-Empirical Formula: simplest ratio of the number of atoms of the elements present in one molecule, e.g. CH2O
-Molecular Formula: actual number of the atoms of the elements present in one molecule, e.g. C3H6O3
-Structural Formula: shows how the constituent atoms of a molecule are joined together with minimal detail,
-using conventional groups, for an unambiguous structure, e.g. CH3CH(OH)CO2H
-Full Structural or Displayed Formula: detailed structure of molecule showing the relative placing of atoms and
-the number of bonds between them,
-e.g.
-Where a benzene ring is part of the molecule, a displayed formula for benzene will not be expected to be drawn.
-23
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-Skeletal Formula: simplified representation of an organic formula derived from the structural formula by
-removing hydrogen atoms (and their associated bonds) and carbon atoms from alkyl chains, leaving just the
-carbon-carbon bonds in the carbon skeleton and the associated functional groups.
-Skeletal or partial skeletal representations may be used in question papers and are acceptable in candidates’
-answers where they are unambiguous,
-e.g.
-The convention for representing the aromatic ring is preferred.
-Stereochemical Formula: show spatial arrangement of bonds, atoms and groups in molecule in 3-D,
-e.g.
-O
-OH
-OH
-When drawing a pair of enantiomers, candidates should indicate the three-dimensional structures according to
-the convention used in the example below.
-CH3
-CH3
-∗
-∗
-C
-C
-H
-CO2H
-OH
-CO2H
-H
-HO
-mirror
-plane
-Candidates are expected to be able to interpret and use the curly arrow notation to represent the movement of
-electrons in organic reaction mechanisms.
-For movement of a pair of electrons (full arrow):
-δ + δ –
-Z
-+ +
-X Y
-Z X Y
-For movement of a single unpaired electron (half arrow):
-Z Z X Y
-+
-X Y
-+
-Learning Outcomes
+## 11 ORGANIC CHEMISTRY
+
+**Preamble**
+
+While organic chemistry has unique aspects, it's important to connect it with other syllabus topics.  Candidates are encouraged to group organic reactions by mechanism and compare/contrast them.  When describing preparations, specify reagents (e.g., aqueous NaOH), essential conditions (e.g., reflux), and major products.  Specific temperature/pressure values and detailed practical procedures aren't required. However, candidates might suggest purification/extraction steps based on reagents, conditions, and products.  In redox reactions, [O] and [H] are acceptable.
+
+### 11.1 INTRODUCTION
+
+**Content**
+
+* Empirical, molecular, and structural formulae
+* Functional groups and nomenclature
+* Shapes of organic molecules; σ and π bonds
+
+Candidates should interpret and use these representations (using (+)-lactic acid as an example):
+
+* **Empirical Formula:** Simplest ratio (e.g., CH<sub>2</sub>O)
+* **Molecular Formula:** Actual number of atoms (e.g., C<sub>3</sub>H<sub>6</sub>O<sub>3</sub>)
+* **Structural Formula:** Minimal detail, unambiguous (e.g., CH<sub>3</sub>CH(OH)CO<sub>2</sub>H)
+* **Displayed Formula:** Shows all bonds and atom placement (e.g., drawn structure. Benzene rings can be simplified).
+* **Skeletal Formula:** Simplified; removes H and alkyl chain C atoms (e.g., drawn structure.  Aromatic ring convention preferred).
+* **Stereochemical Formula:** Shows 3D arrangement (e.g., drawn structure using wedges and dashes).  Follow conventions for enantiomers (drawn structure with mirror plane).
+
+Curly arrow notation for electron movement:
+
+* **Electron pair:** Full arrow (drawn example)
+* **Single electron:** Half arrow (drawn example)
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) interpret, and use the nomenclature, general formulae and displayed formulae of the following classes of
-compound:
-(i) hydrocarbons (alkanes, alkenes and arenes)
-(ii) halogen derivatives (halogenoalkanes and halogenoarenes)
-(iii) hydroxyl compounds (alcohols and phenols)
-(iv) carbonyl compounds (aldehydes and ketones)
-24
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-(v) carboxylic acids and derivatives (acyl chlorides and esters)
-(vi) nitrogen compounds (amines, amides, amino acids and nitriles)
-(b) describe sp3 hybridisation, as in ethane molecule, sp2 hybridisation, as in ethene and benzene molecules,
-and sp hybridisation, as in ethyne molecule
-(c) explain the shapes of, and bond angles in, the ethane, ethene, benzene, and ethyne molecules in relation
-to σ and π carbon-carbon bonds
-(d) predict the shapes of, and bond angles in, molecules analogous to those specified in (c)
-11.2 ISOMERISM
-Content
-• Isomerism: constitutional (structural); cis-trans; enantiomerism
-Learning Outcomes
+
+(a) Interpret and use nomenclature, general formulae, and displayed formulae for:
+    (i) Hydrocarbons (alkanes, alkenes, arenes)
+    (ii) Halogen derivatives (halogenoalkanes, halogenoarenes)
+    (iii) Hydroxyl compounds (alcohols, phenols)
+    (iv) Carbonyl compounds (aldehydes, ketones)
+    (v) Carboxylic acids and derivatives (acyl chlorides, esters)
+    (vi) Nitrogen compounds (amines, amides, amino acids, nitriles)
+(b) Describe sp<sup>3</sup> (ethane), sp<sup>2</sup> (ethene, benzene), and sp (ethyne) hybridization.
+(c) Explain shapes and bond angles in ethane, ethene, benzene, and ethyne relating to σ and π bonds.
+(d) Predict shapes and bond angles in analogous molecules.
+
+### 11.2 ISOMERISM
+
+**Content**
+
+* Constitutional (structural) isomerism
+* Cis-trans isomerism
+* Enantiomerism
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) describe constitutional (structural) isomerism
-(b) describe cis-trans isomerism in alkenes, and explain its origin in terms of restricted rotation due to the
-presence of π bonds
-[use of E, Z nomenclature is not required]
-(c) explain what is meant by a chiral centre
-(d) deduce whether a given molecule is chiral based on the presence or absence of chiral centres and/or a
-plane of symmetry
-(e) recognise that an optically active sample rotates plane-polarised light and contains chiral molecules
-(f) recognise that enantiomers have identical physical properties except in the direction in which they rotate
-plane-polarised light
-[usage of the term diastereomers is not required]
-(g) recognise that enantiomers have identical chemical properties except in their interactions with another
-chiral molecule
-(h) recognise that different stereoisomers exhibit different biological properties, for example in drug action
-(i) deduce the possible isomers for an organic molecule of known molecular formula
-(j) identify chiral centres and/or cis-trans isomerism in a molecule of given structural formula
-25
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-11.3 ORGANIC REACTIONS AND MECHANISMS
-Content
-• Common terms for organic reactions and reactivities
-• Reactivity of some classes of compounds and their characteristic organic reaction mechanisms
-Learning Outcomes
+
+(a) Describe constitutional (structural) isomerism.
+(b) Describe cis-trans isomerism in alkenes; explain restricted rotation due to π bonds. (E/Z not required)
+(c) Explain chiral centers.
+(d) Determine chirality based on chiral centers/symmetry.
+(e) Recognize that optically active samples rotate plane-polarized light and contain chiral molecules.
+(f) Recognize enantiomers have identical physical properties except for rotation of plane-polarized light. (Diastereomers not required)
+(g) Recognize enantiomers have identical chemical properties except with other chiral molecules.
+(h) Recognize stereoisomers' differing biological properties (e.g., drug action).
+(i) Deduce possible isomers from a molecular formula.
+(j) Identify chiral centers and cis-trans isomerism in a structural formula.
+
+
+### 11.3 ORGANIC REACTIONS AND MECHANISMS
+
+**Content**
+
+* Common terms for organic reactions and reactivities
+* Reactivity of compound classes and their characteristic mechanisms
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) (b) (c) (d) (e) (f) (g) (h) (i) (j) interpret and use the following terminology associated with organic reactions:
-(i) functional group
-(ii) degree of substitution: primary, secondary, tertiary, quaternary
-(iii) homolytic and heterolytic fission
-(iv) carbocation
-(v) free radical
-(vi) electrophile (Lewis acid), nucleophile (Lewis base)
-(vii) addition, substitution, elimination, condensation, hydrolysis
-(viii) oxidation and reduction
-[in equations for organic redox reactions, the symbols [O] and [H] are acceptable]
-interpret and use the following terminology associated with organic reactivities:
-(i) delocalisation
-(ii) electronic effect (electron-donating and electron-withdrawing effect)
-(iii) steric effect (steric hindrance)
-explain the general unreactivity of alkanes, including towards polar reagents
-explain the general reactivity of alkenes towards electrophilic reagents/electrophiles
-explain, in terms of delocalisation of π electrons, the difference between benzene and alkene:
-(i) reactivity towards electrophiles
-(ii) preference of benzene to undergo substitution rather than addition reaction
-interpret the different reactivities of halogenoalkanes, with particular reference to hydrolysis, and to the
-relative strengths of the carbon-halogen bonds
-explain the unreactivity of chlorobenzene compared to halogenoalkanes towards nucleophilic substitution,
-in terms of the delocalisation of the lone pair of electrons on the halogen and steric hindrance
-explain the reactivity of carbonyl compounds towards nucleophilic reagents, such as hydrogen cyanide
-apply (a) and (b) to the understanding of mechanisms in terms of organic structure and bonding
-recognise that the mechanisms of polar reactions involve the flow of electrons from electron-rich to
-electron-poor sites
-26
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-(k) describe the mechanism of free-radical substitution with particular reference to the initiation, propagation
-and termination reactions, exemplified by reaction of ethane with chlorine
-(l) describe the mechanism of electrophilic addition in alkenes, using bromine (Br2 (in CCl4)) with ethene as an
-example
-(m) (i) describe the mechanism of electrophilic substitution in arenes, using the mono-bromination of
-benzene as an example
-(ii) describe the effect of the delocalisation of electrons in arenes in such reactions
-(n) describe and explain the mechanisms of nucleophilic substitutions in halogenoalkanes:
-(i) SN1, in terms of stability of the carbocation intermediates
-(ii) SN2, in terms of steric hindrance in the halogenoalkanes
-(o) describe the mechanism of the nucleophilic addition reactions of hydrogen cyanide with aldehydes and
-ketones
-In each of the sections below, 11.4 to 11.10, candidates will be expected to be able to predict the reaction
-products of a given compound in reactions that are chemically similar to those specified.
-11.4 HYDROCARBONS
-Content
-• Alkanes (exemplified by ethane)
-(i) free-radical substitution reactions
-• Alkenes (exemplified by ethene)
-(i) electrophilic addition, including Markovnikov’s rule
-(ii) reduction and oxidation reactions
-• Arenes (exemplified by benzene and methylbenzene)
-(i) influence of delocalised π electrons on structure and properties
-(ii) electrophilic substitution reactions
-(iii) oxidation of side-chain
-• Hydrocarbons as fuels
-Learning Outcomes
+
+(a) Interpret and use terminology: functional group, degree of substitution (primary, etc.), homolytic/heterolytic fission, carbocation, free radical, electrophile/nucleophile, addition/substitution/elimination/condensation/hydrolysis, oxidation/reduction ([O] and [H] acceptable).
+(b) Interpret and use terminology: delocalization, electronic effect (electron-donating/withdrawing), steric effect.
+(c) Explain alkane unreactivity.
+(d) Explain alkene reactivity with electrophiles.
+(e) Explain benzene vs. alkene reactivity/addition vs. substitution due to π electron delocalization.
+(f) Interpret halogenoalkane reactivity (hydrolysis, C-X bond strength).
+(g) Explain chlorobenzene's unreactivity vs. halogenoalkanes (delocalization, steric hindrance).
+(h) Explain carbonyl compound reactivity with nucleophiles (e.g., HCN).
+(i) Apply (a) and (b) to understand mechanisms based on structure and bonding.
+(j) Recognize electron flow in polar reactions (electron-rich to electron-poor).
+(k) Describe free radical substitution (initiation, propagation, termination) using ethane + chlorine.
+(l) Describe electrophilic addition in alkenes using Br<sub>2</sub> + ethene.
+(m) (i) Describe electrophilic substitution in arenes using benzene bromination. (ii) Describe delocalization effects.
+(n) Describe nucleophilic substitution in halogenoalkanes: (i) S<sub>N</sub>1 (carbocation stability) (ii) S<sub>N</sub>2 (steric hindrance).
+(o) Describe nucleophilic addition of HCN to aldehydes/ketones.
+
+**(Sections 11.4-11.10: Predict products of similar reactions)**
+
+### 11.4 HYDROCARBONS
+
+**Content**
+
+* **Alkanes (ethane):** Free radical substitution
+* **Alkenes (ethene):** Electrophilic addition (Markovnikov's rule), reduction, oxidation
+* **Arenes (benzene, methylbenzene):** Delocalized π electrons, electrophilic substitution, side-chain oxidation
+* **Hydrocarbons as fuels**
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) describe the chemistry of alkanes as exemplified by the following reactions of ethane:
-(i) combustion
-(ii) free-radical substitution by chlorine and by bromine in the presence of ultraviolet light at room
-temperature (see also 11.3(c), 11.3(k))
-(b) describe the chemistry of alkenes as exemplified, where relevant, by the following reactions of ethene:
-(i) electrophilic addition of steam (H2O(g) with H3PO4 catalyst), hydrogen halides (HX(g)) and halogens
-(X2(aq) or X2 (in CCl4)) (see also 11.3(d), 11.3(l))
-(ii) reduction via catalytic hydrogenation, using H2(g) and Ni catalyst (catalytic addition of hydrogen; see
-also 8(j))
-(iii) oxidation by cold, alkaline solution of manganate(VII) ions to form the diol
-(iv) oxidation by hot, acidified solution of manganate(VII) ions leading to the rupture of the carbon-to-
-carbon double bond in order to determine the position of alkene linkages in larger molecules
-27
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-(c) apply Markovnikov’s rule to the addition of hydrogen halides to unsymmetrical alkenes, and explain the
-composition of products in terms of the stability of carbocation intermediates
-(d) describe the chemistry of the benzene ring as exemplified by the following reactions of benzene and
-methylbenzene (see also Section 4, 11.3(e) and 11.3(m)(i)):
-(i) electrophilic substitution reactions with chlorine using AlCl3 as catalyst and with bromine using AlBr3
-as catalyst (recognise the use of Lewis acid as catalysts)
-(ii) nitration with a mixture of concentrated nitric acid and concentrated sulfuric acid, with the reaction
-mixture maintained at 30°C for methylbenzene and 50°C for benzene (recognise concentrated sulfuric
-acid as a Brønsted-Lowry acid catalyst)
-(iii) Friedel-Crafts alkylation with halogenoalkanes using AlCl3 or AlBr3 as catalyst (recognise the use of
-Lewis acid as catalysts)
-(e) describe the chemistry of the alkyl side-chain of benzene ring as exemplified by the following reactions of
-methylbenzene:
-(i) free-radical substitution by chlorine and by bromine in the presence of ultraviolet light at room
-temperature
-(ii) complete oxidation to give benzoic acid using hot alkaline KMnO4 and then dilute acid, or using hot
-acidified KMnO4
-(f) predict whether halogenation will occur in the side-chain or aromatic nucleus in arenes depending on
-reaction conditions
-(g) apply the knowledge of positions of substitution in the electrophilic substitution reactions of
-mono-substituted arenes
-(h) recognise the environmental consequences of:
-(i) carbon monoxide, oxides of nitrogen and unburnt hydrocarbons arising from the internal combustion
-engine and of their catalytic removal
-(ii) gases that contribute to the enhanced greenhouse effect
-11.5 HALOGEN DERIVATIVES
-Content
-• Halogenoalkanes
-(i) nucleophilic substitution
-(ii) elimination
-• Relative strength of the carbon-halogen bond
-• Unreactivity of halogenoarenes
-Learning Outcomes
+
+(a) Describe ethane reactions: combustion, free radical substitution (Cl<sub>2</sub>, Br<sub>2</sub>, UV light).
+(b) Describe ethene reactions: electrophilic addition (H<sub>2</sub>O(g)/H<sub>3</sub>PO<sub>4</sub>, HX(g), X<sub>2</sub>), reduction (H<sub>2</sub>/Ni), oxidation (cold, alkaline MnO<sub>4</sub><sup>-</sup>, hot, acidified MnO<sub>4</sub><sup>-</sup>).
+(c) Apply Markovnikov's rule, explain product composition via carbocation stability.
+(d) Describe benzene/methylbenzene reactions: electrophilic substitution (Cl<sub>2</sub>/AlCl<sub>3</sub>, Br<sub>2</sub>/AlBr<sub>3</sub>, HNO<sub>3</sub>/H<sub>2</sub>SO<sub>4</sub>, Friedel-Crafts alkylation).
+(e) Describe methylbenzene side-chain reactions: free radical substitution (Cl<sub>2</sub>, Br<sub>2</sub>, UV light), oxidation (KMnO<sub>4</sub>) to benzoic acid.
+(f) Predict side-chain vs. aromatic nucleus halogenation based on conditions.
+(g) Apply knowledge of substitution positions in monosubstituted arenes.
+(h) Recognize environmental impact of: (i) CO, NO<sub>x</sub>, unburnt hydrocarbons from combustion engines and catalytic removal. (ii) Greenhouse gases.
+
+
+### 11.5 HALOGEN DERIVATIVES
+
+**Content**
+
+* **Halogenoalkanes:** Nucleophilic substitution, elimination
+* **Carbon-halogen bond strength**
+* **Halogenoarene unreactivity**
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) recall the chemistry of halogenoalkanes as exemplified by:
-(i) the following nucleophilic substitution reactions of bromoethane:
-• hydrolysis using NaOH(aq) and heat
-• formation of nitriles using KCN in ethanol and heat
-• formation of primary amines by reaction with ammonia in ethanol heated under pressure
-(ii) the elimination of hydrogen bromide from 2-bromopropane using NaOH in ethanol and heat
-28
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-(b) explain the stereochemical outcome in nucleophilic substitution involving optically active substrates (see
-also 11.3(n)):
-(i) inversion of configuration in SN2 mechanism
-(ii) racemisation in SN1 mechanism
-(c) suggest characteristic reactions to differentiate between:
-(i) different halogenoalkanes (see also 11.3(f))
-(ii) halogenoalkanes and halogenoarenes (see also 11.3(g))
-e.g. hydrolysis, followed by testing of the halide ions
-(d) explain the uses of fluoroalkanes and fluorohalogenoalkanes in terms of their relative chemical inertness
-(e) recognise the effect of chlorofluoroalkanes (CFCs) on the ozone layer, and that their proposed
-replacements, hydrofluoroalkanes (HFCs) and hydrochlorofluoroalkanes (HCFCs), have significant
-environmental impact too
-[the mechanistic details of how CFCs and HCFCs deplete the ozone layer are not required]
-11.6 HYDROXY COMPOUNDS
-Content
-• Alcohols (exemplified by ethanol)
-(i) formation of halogenoalkanes
-(ii) reaction with sodium; oxidation; dehydration
-(iii) the tri-iodomethane test
-• Phenol
-(i) (ii) its acidity; reaction with bases and sodium
-nitration of, and bromination of, the aromatic ring
-Learning Outcomes
+
+(a) Recall halogenoalkane chemistry: (i) Bromoethane nucleophilic substitution (hydrolysis with NaOH, nitrile formation with KCN, amine formation with NH<sub>3</sub>). (ii) 2-bromopropane HBr elimination with NaOH/ethanol/heat.
+(b) Explain stereochemical outcomes in nucleophilic substitution with optically active substrates: (i) S<sub>N</sub>2 inversion. (ii) S<sub>N</sub>1 racemization.
+(c) Suggest reactions to differentiate: (i) different halogenoalkanes. (ii) halogenoalkanes vs. halogenoarenes (e.g., hydrolysis, halide tests).
+(d) Explain fluoroalkane/fluorohalogenoalkane uses based on inertness.
+(e) Recognize CFC ozone depletion and environmental impact of HFC/HCFC replacements (mechanisms not required).
+
+
+### 11.6 HYDROXY COMPOUNDS
+
+**Content**
+
+* **Alcohols (ethanol):** Halogenoalkane formation, reaction with Na, oxidation, dehydration, tri-iodomethane test.
+* **Phenol:** Acidity, reaction with bases/Na, nitration/bromination.
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) recall the chemistry of alcohols, exemplified by ethanol:
-(i) combustion
-(ii) nucleophilic substitution to give halogenoalkanes using hydrogen halides, HX or PCl5
-(iii) reaction with sodium
-(iv) oxidation to:
-• carbonyl compounds using acidified K2Cr2O7, heat with distillation
-• carboxylic acids using primary alcohols, acidified KMnO4 and heat (under reflux)
-• carboxylic acids using primary alcohols, acidified K2Cr2O7 and heat (under reflux)
-(v) dehydration to alkenes using concentrated H3PO4 catalyst and heat
-(b) suggest characteristic distinguishing reactions for the different classes of alcohols (primary, secondary and
-tertiary alcohols), e.g. mild oxidation
-(c) deduce the presence of a CH3CH(OH)– group in an alcohol from its reaction with warm alkaline aqueous
-iodine to form tri-iodomethane
-29
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-(d) recall the chemistry of phenol, as exemplified by the following reactions:
-(i) with bases
-(ii) with sodium
-(iii) nitration of the benzene ring (using dilute HNO3) to form a mixture of 2-nitrophenol and 4-nitrophenol,
-and bromination of the benzene ring (using aqueous Br2) to form 2,4,6-tribromophenol
-(e) explain the relative acidities of water, phenol and ethanol in aqueous medium (interpret as Brønsted-Lowry
-acids)
-11.7 CARBONYL COMPOUNDS
-Content
-• Aldehydes (exemplified by ethanal)
-(i) oxidation to carboxylic acid
-(ii) nucleophilic addition with hydrogen cyanide
-(iii) characteristic tests for aldehydes
-• Ketones (exemplified by propanone and phenylethanone)
-(i) nucleophilic addition with hydrogen cyanide
-(ii) characteristic tests for ketones
-Learning Outcomes
+
+(a) Recall ethanol chemistry: combustion, nucleophilic substitution (HX, PCl<sub>5</sub>), reaction with Na, oxidation (to carbonyl compounds with K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>, to carboxylic acids with KMnO<sub>4</sub>/K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>), dehydration (H<sub>3</sub>PO<sub>4</sub>).
+(b) Suggest reactions to differentiate primary/secondary/tertiary alcohols (e.g., mild oxidation).
+(c) Deduce CH<sub>3</sub>CH(OH)- presence via tri-iodomethane test.
+(d) Recall phenol chemistry: reaction with bases/Na, nitration (dilute HNO<sub>3</sub>), bromination (aqueous Br<sub>2</sub>).
+(e) Explain relative acidities of water, phenol, and ethanol.
+
+
+### 11.7 CARBONYL COMPOUNDS
+
+**Content**
+
+* **Aldehydes (ethanal):** Oxidation to carboxylic acid, nucleophilic addition (HCN), characteristic tests.
+* **Ketones (propanone, phenylethanone):** Nucleophilic addition (HCN), characteristic tests.
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) describe the formation of aldehydes and ketones from, and their reduction to, primary and secondary
-alcohols respectively (using LiAlH4, or using H2(g), Ni catalyst)
-(b) describe the reactions of hydrogen cyanide (using KCN catalyst) with aldehydes and ketones (see also
-11.3(o))
-(c) describe the use of 2,4-dinitrophenylhydrazine (2,4-DNPH) to detect the presence of carbonyl compounds
-(d) deduce the nature (aldehyde or ketone) of an unknown carbonyl compound from the results of simple tests
-(i.e. warming in Fehling’s and Tollens’ reagents; ease of oxidation)
-(e) deduce the presence of a CH3CO– group in a carbonyl compound from its reaction with warm alkaline
-aqueous iodine to give tri-iodomethane
-11.8 CARBOXYLIC ACIDS AND DERIVATIVES
-Content
-• Carboxylic acids (exemplified by ethanoic acid and benzoic acid)
-(i) formation from primary alcohols and nitriles
-(ii) salt, ester and acyl chloride formation
-• Acyl chlorides (exemplified by ethanoyl chloride)
-(i) ease of hydrolysis compared with alkyl and aryl chlorides
-(ii) reaction with alcohols, phenols and primary amines
-• Esters (exemplified by ethyl ethanoate and phenyl benzoate)
-(i) formation from carboxylic acids and from acyl chlorides
-(ii) hydrolysis (under acidic and under basic conditions)
-30
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-Learning Outcomes
+
+(a) Describe aldehyde/ketone formation from, and reduction to, primary/secondary alcohols (LiAlH<sub>4</sub>, H<sub>2</sub>/Ni).
+(b) Describe HCN reactions with aldehydes/ketones (KCN catalyst).
+(c) Describe 2,4-DNPH use for carbonyl detection.
+(d) Deduce aldehyde/ketone identity via Fehling's/Tollens' tests, ease of oxidation.
+(e) Deduce CH<sub>3</sub>CO- presence via tri-iodomethane test.
+
+
+### 11.8 CARBOXYLIC ACIDS AND DERIVATIVES
+
+**Content**
+
+* **Carboxylic acids (ethanoic acid, benzoic acid):** Formation, salt/ester/acyl chloride formation.
+* **Acyl chlorides (ethanoyl chloride):** Hydrolysis, reaction with alcohols/phenols/amines.
+* **Esters (ethyl ethanoate, phenyl benzoate):** Formation, hydrolysis.
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) describe the formation of carboxylic acids from:
-• primary alcohols using acidified KMnO4 or acidified K2Cr2O7, and heat (under reflux)
-• aldehydes using acidified KMnO4 or acidified K2Cr2O7, and heat (under reflux)
-• nitriles by heating with dilute acid (or dilute alkali followed by acidification)
-(b) describe the reactions of carboxylic acids in the formation of:
-(i) salts via reaction with metals, alkalis or carbonates
-(ii) esters via condensation with alcohols (using concentrated H2SO4 catalyst and heat), using ethyl
-ethanoate as an example
-(iii) acyl chlorides via reaction with PCl5 using ethanoyl chloride as an example
-(iv) primary alcohols via reduction with LiAlH4, using ethanol as an example
-(c) explain the acidity of carboxylic acids and of chlorine-substituted ethanoic acids in terms of their structures
-(d) describe the hydrolysis of acyl chlorides with water
-(e) describe the condensation reactions of acyl chlorides with alcohols, phenols and primary amines
-(f) explain the relative ease of hydrolysis of acyl chlorides, alkyl chlorides and aryl chlorides
-(g) describe the formation of esters from the condensation reaction of acyl chlorides, using phenyl benzoate as
-an example
-(h) describe the acid and base hydrolysis of esters using aqueous acid (or aqueous alkali) and heat
-11.9 NITROGEN COMPOUNDS
-Content
-• Amines (exemplified by ethylamine and phenylamine)
-(i) their formation
-(ii) salt formation
-(iii) other reactions of phenylamine
-• Amides (exemplified by ethanamide)
-(i) formation from acyl chlorides
-(ii) neutrality of amides
-(iii) hydrolysis (under acidic and under basic conditions)
-• Amino acids (exemplified by aminoethanoic acid)
-(i) their acid and base properties
-Learning Outcomes
+
+(a) Describe carboxylic acid formation: from primary alcohols/aldehydes (KMnO<sub>4</sub>, K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>), from nitriles.
+(b) Describe carboxylic acid reactions: salt formation, esterification (H<sub>2</sub>SO<sub>4</sub>), acyl chloride formation (PCl<sub>5</sub>), reduction to primary alcohols (LiAlH<sub>4</sub>).
+(c) Explain acidity of carboxylic acids and chlorine-substituted ethanoic acids.
+(d) Describe acyl chloride hydrolysis.
+(e) Describe acyl chloride condensation with alcohols/phenols/amines.
+(f) Explain relative hydrolysis ease of acyl chlorides, alkyl chlorides, and aryl chlorides.
+(g) Describe ester formation from acyl chlorides.
+(h) Describe acid/base hydrolysis of esters.
+
+
+### 11.9 NITROGEN COMPOUNDS
+
+**Content**
+
+* **Amines (ethylamine, phenylamine):** Formation, salt formation, phenylamine reactions.
+* **Amides (ethanamide):** Formation, neutrality, hydrolysis.
+* **Amino acids (aminoethanoic acid):** Acid/base properties.
+
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) describe the formation of amines as exemplified by:
-• ethylamine through reduction of amide using LiAlH4 and nitrile using LiAlH4 or H2(g), Ni catalyst (see
-also Section 11.5)
-• phenylamine through the reduction of nitrobenzene using Sn and concentrated HCl with heating,
-followed by NaOH(aq)
-(b) describe the reaction of amines in the formation of salts
-(c) describe and explain the basicity of primary, secondary and tertiary amines in the gaseous phase (interpret
-as Lewis bases)
-31
-9476 CHEMISTRY GCE ADVANCED LEVEL H2 SYLLABUS (2026)
-(d) explain the relative basicities of ammonia, ethylamine and phenylamine in aqueous medium, in terms of
-their structures
-(e) describe the reaction of phenylamine with aqueous bromine
-(f) describe the formation of amides from the condensation reaction between RNH2 and R'COCl
-(g) explain why amide is neutral in terms of delocalisation of the lone pair of electrons on nitrogen
-(h) describe the chemistry of amides, exemplified by the following reactions:
-(i) hydrolysis using aqueous acid (or aqueous alkali) and heat
-(ii) reduction to amines with LiAlH4
-(i) describe the acid/base properties of amino acids
-11.10 POLYMERS
-Content
-• Addition and condensation of polymers
-• Proteins
-(i) formation of proteins
-(ii) hydrolysis of proteins
-• Biodegradability of poly(alkenes), polyesters and polyamides
-Learning Outcomes
+
+(a) Describe amine formation: ethylamine (amide/nitrile reduction with LiAlH<sub>4</sub>, H<sub>2</sub>/Ni), phenylamine (nitrobenzene reduction with Sn/HCl, NaOH).
+(b) Describe amine salt formation.
+(c) Describe/explain gas-phase basicity of amines (Lewis bases).
+(d) Explain relative aqueous basicities of ammonia, ethylamine, and phenylamine.
+(e) Describe phenylamine reaction with aqueous bromine.
+(f) Describe amide formation from RNH<sub>2</sub> and R'COCl.
+(g) Explain amide neutrality via electron delocalization.
+(h) Describe amide reactions: hydrolysis, reduction to amines (LiAlH<sub>4</sub>).
+(i) Describe amino acid acid/base properties.
+
+
+### 11.10 POLYMERS
+
+**Content**
+
+* Addition and condensation polymers
+* **Proteins:** Formation, hydrolysis
+* Biodegradability
+
+**Learning Outcomes**
+
 Candidates should be able to:
-(a) recognise polymers as macromolecules built up from monomers, with average relative molecular mass of
-at least 1000 or at least 100 repeat units
-(b) classify and explain the difference between addition polymers (as exemplified by poly(alkenes)) and
-condensation polymers (as exemplified by polyesters and polyamides)
-(c) describe proteins as an example of condensation polymers made up of α-amino acids as monomers,
-forming peptide (amide) bonds
-(d) describe the hydrolysis of proteins using aqueous acid (or aqueous alkali) and heat
-(e) recognise that poly(alkenes) are chemically inert and can therefore be difficult to biodegrade (see also
-11.3(c))
-(f) recognise that polyesters and polyamides are generally biodegradable by hydrolysis (see also 11.8(h) and
-11.9(h)(i))
-(g) recognise that materials are a finite resource and the importance of recycling plastics, considering the
-economic, environmental and social factors
+
+(a) Recognize polymers as macromolecules (≥1000 Mr or ≥100 repeat units).
+(b) Classify/explain addition (polyalkenes) vs. condensation (polyesters, polyamides) polymers.
+(c) Describe proteins as condensation polymers of α-amino acids with peptide bonds.
+(d) Describe protein hydrolysis.
+(e) Recognize polyalkene inertness and biodegradability challenges.
+(f) Recognize polyester/polyamide biodegradability via hydrolysis.
+(g) Recognize material finiteness and recycling importance (economic, environmental, social factors).
