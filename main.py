@@ -14,6 +14,7 @@ from modal import App, Image, asgi_app
 
 from bot_JapaneseKana import JapaneseKanaBot
 from bot_KnowledgeTest import KnowledgeTestBot
+from bot_KnowledgeTest import KnowledgeTestBot as ChemBanditBot
 
 # NOTE: this key is here to ensure that messages actually come from Poe servers
 POE_ACCESS_KEY = "A"*32
@@ -102,6 +103,7 @@ def fastapi_app():
         [
             JapaneseKanaBot(path="/JapaneseKana", access_key=POE_ACCESS_KEY),
             KnowledgeTestBot(path="/KnowledgeTest", access_key=POE_ACCESS_KEY),
+            ChemBanditBot(path="/ChemBandit", access_key=POE_ACCESS_KEY),
         ],
     )
     return app
