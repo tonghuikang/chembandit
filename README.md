@@ -12,6 +12,13 @@ When the deployment is successful, you get something like
 https://handle-tmp-workspace--chembandit-poe-fastapi-app.modal.run
 ```
 
+Add the bot handle
+
+```text
+https://handle-tmp-workspace--chembandit-poe-fastapi-app.modal.run/JapaneseKana
+https://handle-tmp-workspace--chembandit-poe-fastapi-app.modal.run/KnowledgeTest
+```
+
 You should be able to access the URL, and the page should contain text like
 
 ```text
@@ -20,4 +27,7 @@ FastAPI Poe bot server
 Congratulations! Your server is running. To connect it to Poe, create a bot at https://poe.com/create_bot?server=1.
 ```
 
-Copy the url to a new bot like https://poe.com/create_bot?server=1
+Go to https://poe.com/create_bot?server=1 and create a server bot.
+
+The access key will be `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`.
+This access key doesn't need to be private unless you are using your own LLM provider API keys.

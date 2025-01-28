@@ -12,7 +12,8 @@ import os
 import fastapi_poe as fp
 from modal import App, Image, asgi_app
 
-from bot_ChemBandit import JapaneseKanaBot
+from bot_JapaneseKana import JapaneseKanaBot
+from bot_KnowledgeTest import KnowledgeTestBot
 
 # NOTE: this key is here to ensure that messages actually come from Poe servers
 POE_ACCESS_KEY = "A"*32
@@ -85,6 +86,7 @@ image = (
         }
     )
     .copy_local_file("japanese_kana.csv", "/root/japanese_kana.csv")  # JapaneseKana
+    .copy_local_file("mmlu.csv", "/root/mmlu.csv")  # KnowledgeTest
 )
 app = App("chembandit-poe")
 
@@ -93,12 +95,13 @@ app = App("chembandit-poe")
 @asgi_app()
 def fastapi_app():
     # see https://creator.poe.com/docs/quick-start#configuring-the-access-credentials
-    app = fp.make_app(JapaneseKanaBot(), access_key=POE_ACCESS_KEY)
+    # app = fp.make_app(JapaneseKanaBot(), access_key=POE_ACCESS_KEY)
 
     # If you want to deploy multiple bot at the same time
-    # app = fp.make_app(
-    #     [
-    #         JapaneseKanaBot(path="/JapaneseKana", access_key=POE_ACCESS_KEY),
-    #     ],
-    # )
+    app = fp.make_app(
+        [
+            JapaneseKanaBot(path="/JapaneseKana", access_key=POE_ACCESS_KEY),
+            KnowledgeTestBot(path="/KnowledgeTest", access_key=POE_ACCESS_KEY),
+        ],
+    )
     return app
