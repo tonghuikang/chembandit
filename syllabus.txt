@@ -2,7 +2,7 @@
 
 **Preamble**
 
-While organic chemistry has unique aspects, it's important to connect it with other syllabus topics.  Candidates are encouraged to group organic reactions by mechanism and compare/contrast them.  When describing preparations, specify reagents (e.g., aqueous NaOH), essential conditions (e.g., reflux), and major products.  Specific temperature/pressure values and detailed practical procedures aren't required. However, candidates might suggest purification/extraction steps based on reagents, conditions, and products.  In redox reactions, [O] and [H] are acceptable.
+While organic chemistry has unique aspects, it's important to connect it with other syllabus topics. Candidates are encouraged to group organic reactions by mechanism and compare/contrast them. When describing preparations, specify reagents (e.g., aqueous NaOH), essential conditions (e.g., reflux), and major products. Specific temperature/pressure values and detailed practical procedures aren't required. However, candidates might suggest purification/extraction steps based on reagents, conditions, and products. In redox reactions, [O] and [H] are acceptable.
 
 ### 11.1 INTRODUCTION
 
@@ -18,8 +18,8 @@ Candidates should interpret and use these representations (using (+)-lactic acid
 * **Molecular Formula:** Actual number of atoms (e.g., C<sub>3</sub>H<sub>6</sub>O<sub>3</sub>)
 * **Structural Formula:** Minimal detail, unambiguous (e.g., CH<sub>3</sub>CH(OH)CO<sub>2</sub>H)
 * **Displayed Formula:** Shows all bonds and atom placement (e.g., drawn structure. Benzene rings can be simplified).
-* **Skeletal Formula:** Simplified; removes H and alkyl chain C atoms (e.g., drawn structure.  Aromatic ring convention preferred).
-* **Stereochemical Formula:** Shows 3D arrangement (e.g., drawn structure using wedges and dashes).  Follow conventions for enantiomers (drawn structure with mirror plane).
+* **Skeletal Formula:** Simplified; removes H and alkyl chain C atoms (e.g., drawn structure. Aromatic ring convention preferred).
+* **Stereochemical Formula:** Shows 3D arrangement (e.g., drawn structure using wedges and dashes). Follow conventions for enantiomers (drawn structure with mirror plane).
 
 Curly arrow notation for electron movement:
 
@@ -31,12 +31,12 @@ Curly arrow notation for electron movement:
 Candidates should be able to:
 
 (a) Interpret and use nomenclature, general formulae, and displayed formulae for:
-    (i) Hydrocarbons (alkanes, alkenes, arenes)
-    (ii) Halogen derivatives (halogenoalkanes, halogenoarenes)
-    (iii) Hydroxyl compounds (alcohols, phenols)
-    (iv) Carbonyl compounds (aldehydes, ketones)
-    (v) Carboxylic acids and derivatives (acyl chlorides, esters)
-    (vi) Nitrogen compounds (amines, amides, amino acids, nitriles)
+ (i) Hydrocarbons (alkanes, alkenes, arenes)
+ (ii) Halogen derivatives (halogenoalkanes, halogenoarenes)
+ (iii) Hydroxyl compounds (alcohols, phenols)
+ (iv) Carbonyl compounds (aldehydes, ketones)
+ (v) Carboxylic acids and derivatives (acyl chlorides, esters)
+ (vi) Nitrogen compounds (amines, amides, amino acids, nitriles)
 (b) Describe sp<sup>3</sup> (ethane), sp<sup>2</sup> (ethene, benzene), and sp (ethyne) hybridization.
 (c) Explain shapes and bond angles in ethane, ethene, benzene, and ethyne relating to σ and π bonds.
 (d) Predict shapes and bond angles in analogous molecules.
@@ -237,3 +237,53 @@ Candidates should be able to:
 (e) Recognize polyalkene inertness and biodegradability challenges.
 (f) Recognize polyester/polyamide biodegradability via hydrolysis.
 (g) Recognize material finiteness and recycling importance (economic, environmental, social factors).
+
+
+
+# GLOSSARY OF TERMS
+
+This glossary, relevant only to science subjects, serves as a helpful guide for candidates. It is neither exhaustive nor definitive, and its brevity extends to both the number of terms and their descriptions. The meaning of a term depends in part on its context.
+
+1. **Define (the term(s)...)** Requires a formal statement or equivalent paraphrase of the term's meaning.
+
+2. **What do you understand by/What is meant by (the term(s)...)** Requires a definition and relevant commentary on the term's significance and context, especially when multiple terms are included. The depth of commentary should correspond to the mark value.
+
+3. **State** Demands a concise answer without supporting argument, often a numerical answer obtainable 'by inspection'.
+
+4. **List** Requires a series of points, typically one word each, without elaboration. Adhere to any specified number of points.
+
+5. **Explain** May involve reasoning or theoretical references, depending on the context.
+
+6. **Describe** Requires stating the main points of the topic, using diagrams where appropriate. When referring to phenomena, include visual observations. "Describe" and "give an account of" allow more discretion regarding the answer's nature and organization. "Describe and explain" combines both aspects.
+
+7. **Discuss** Requires a critical account of the points involved.
+
+8. **Outline** Demands brevity, focusing on essential information.
+
+9. **Predict** Requires deriving the answer logically from other information provided in the question or extracted from earlier parts.
+
+10. **Deduce** Similar to "predict," but requires supporting statements, referencing laws/principles, or including the reasoning process.
+
+11. **Comment** An open-ended instruction, inviting recall or inference of relevant points, considering the allocated marks.
+
+12. **Suggest** Implies either no single answer exists or application of general knowledge to a novel situation potentially outside the syllabus.
+
+13. **Find** A general term encompassing calculate, measure, determine, etc.
+
+14. **Calculate** Requires a numerical answer, showing working, especially for multi-step calculations.
+
+15. **Measure** Implies direct obtainment of the quantity using a measuring instrument.
+
+16. **Determine** Often implies indirect calculation using measured or known values in a standard formula.
+
+17. **Estimate** Requires a reasoned order of magnitude statement or calculation, using simplifying assumptions.
+
+18. **Sketch (graphs)** Requires qualitatively correct shape/position. Some quantitative aspects might be relevant depending on the context. **(diagrams)** A simple, freehand drawing is acceptable, but maintain proportions and clear details.
+
+19. **Construct (chemical equations)** Requires writing a balanced equation using analogy or information provided, not factual recall.
+
+20. **Compare** Requires providing both similarities and differences.
+
+21. **Classify** Requires grouping based on common characteristics.
+
+22. **Recognise** Requires identifying critical facts, characteristics, or concepts relevant to understanding a situation, event, process, or phenomenon.

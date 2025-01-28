@@ -14,7 +14,7 @@ from modal import App, Image, asgi_app
 
 from bot_JapaneseKana import JapaneseKanaBot
 from bot_KnowledgeTest import KnowledgeTestBot
-from bot_KnowledgeTest import KnowledgeTestBot as ChemBanditBot
+from bot_ChemBandit import KnowledgeTestBot as ChemBanditBot
 
 # NOTE: this key is here to ensure that messages actually come from Poe servers
 POE_ACCESS_KEY = "A"*32
@@ -88,6 +88,8 @@ image = (
     )
     .copy_local_file("japanese_kana.csv", "/root/japanese_kana.csv")  # JapaneseKana
     .copy_local_file("mmlu.csv", "/root/mmlu.csv")  # KnowledgeTest
+    .copy_local_file("questions_and_answers.csv", "/root/questions_and_answers.csv")  # ChemBandit
+    .copy_local_file("syllabus.txt", "/root/syllabus.txt")  # ChemBandit
 )
 app = App("chembandit-poe")
 
@@ -101,9 +103,9 @@ def fastapi_app():
     # If you want to deploy multiple bot at the same time
     app = fp.make_app(
         [
-            JapaneseKanaBot(path="/JapaneseKana", access_key=POE_ACCESS_KEY),
-            KnowledgeTestBot(path="/KnowledgeTest", access_key=POE_ACCESS_KEY),
-            ChemBanditBot(path="/ChemBandit", access_key=POE_ACCESS_KEY),
+            JapaneseKanaBot(path="/JapaneseKana", access_key=POE_ACCESS_KEY, bot_name="JapaneseKana"),
+            KnowledgeTestBot(path="/KnowledgeTest", access_key=POE_ACCESS_KEY, bot_name="KnowledgeTest"),
+            ChemBanditBot(path="/ChemBandit", access_key=POE_ACCESS_KEY, bot_name="ChemBandit"),
         ],
     )
     return app

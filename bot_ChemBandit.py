@@ -20,17 +20,10 @@ from modal import Dict
 
 my_dict = Dict.from_name("dict-KnowledgeTest", create_if_missing=True)
 
-df = pd.read_csv("mmlu.csv")
-# using https://huggingface.co/datasets/cais/mmlu
-# from datasets import load_dataset
-# dataset = load_dataset("cais/mmlu", "all")
-# df["subject"] = [" ".join(word.capitalize() for word in subject.split("_")) for subject in df["subject"]]
-# df["option_1"] = [choices[0] for choices in df["choices"]]
-# df["option_2"] = [choices[1] for choices in df["choices"]]
-# df["option_3"] = [choices[2] for choices in df["choices"]]
-# df["option_4"] = [choices[3] for choices in df["choices"]]
-# df = df.drop("choices", axis=1)
-# dataset["test"].data.to_pandas()
+df = pd.read_csv("questions_and_answers.csv")
+
+with open("syllabus.txt") as f:
+    syllabus_text = f.read()
 
 TEMPLATE_STARTING_REPLY = """
 Category: **{category}**
@@ -40,29 +33,67 @@ Category: **{category}**
 
 
 FREEFORM_SYSTEM_PROMPT = """
-You will test the user the following questions from the subject {subject}
+You will assess whether the Singapore A-level student has correctly answered the question.
 
+This is the Singapore A-level syllabus
+
+<syllabus>
+{syllabus}
+</syllabus>
+
+This is the question
+<question>
 {question}
+</question>
 
-The options are
-1) {option_1}
-2) {option_2}
-3) {option_3}
-4) {option_4}
+The reference answer is
+<reference_answer>
+{answer}
+</reference_answer>
 
-The correct answer is option {answer}.
+The student is expected to reply with the answer.
 
-You will explain why the user is wrong or correct, and continue the conversation in a helpful manner.
+You will begin your response with exactly either of (without the bullet point)
+- Your answer is correct.
+- Your answer is partially correct.
+- Your answer is incorrect.
+
+Then, after two new lines, display the reference answer. Do NOT edit the reference answer.
+
+Then, after two new lines, you will explain where the student is correct, and where the student is incorrect.
+Prefer to split the explanation across multiple bullet points where possible.
+
+Strongly prefer nomenclature and concepts that are found in the syllabus or the reference answer.
+Use unicode characters (e.g. ₂) instead of HTML tags (e.g. <sub>2</sub>) for subscripts.
+Refer to the glossary of terms to determine whether the student has sufficiently answered the question. (But do not mention "glossary of terms")
+Make sure the student is actually answering the question, and not just copying answers without adapting to the context.
+
+Reply in this format:
+
+Your answer is correct / partially correct / incorrect.
+
+Reference answer: (the reference answer as stated in <reference_answer> and </reference_answer>. Do NOT edit the reference answer.)
+
+Where you are correct (try to find something that the student is correct even if the answer is mostly wrong)
+- (one thing that the student is correct)
+- (one thing that the student is correct)
+- ...
+
+Where you are incorrect (not necessary if the student is fully correct)
+- (one thing that the student is missing or wrong in their answer)
+- (one thing that the student is missing or wrong in their answer)
+- ...
 """
 
 SUGGESTED_REPLIES_SYSTEM_PROMPT = """
-You will suggest replies based on the conversation given by the user.
+You will suggest replies based on the conversation given by the student.
 """
 
 SUGGESTED_REPLIES_USER_PROMPT = """
 Read the conversation above.
 
-Suggest three concise questions the user would ask to learn more about the topic.
+Suggest three questions the student would ask to learn more about the topic.
+Each question should only ask one thing, phrased in the most concise and readable way possible.
 
 Begin each suggestion with <a> and end each suggestion with </a>.
 Do not use inverted commas. Do not prefix each suggestion.
@@ -85,12 +116,15 @@ def extract_suggested_replies(raw_output: str) -> list[str]:
 def stringify_conversation(messages: list[ProtocolMessage]) -> str:
     stringified_messages = ""
 
-    for message in messages:
+    # Gemini-Flash just suggests nonsense the conversation is too long
+    for message in messages[::-1][:5][::-1]:
         # NB: system prompt is intentionally excluded
-        if message.role == "bot":
-            stringified_messages += f"User: {message.content}\n\n"
+        if message.role == "system":
+            stringified_messages += f"System: {message.content}\n\n"
+        elif message.role == "bot":
+            stringified_messages += f"Teacher: {message.content}\n\n"
         else:
-            stringified_messages += f"Character: {message.content}\n\n"
+            stringified_messages += f"Student: {message.content}\n\n"
     return stringified_messages
 
 
@@ -119,22 +153,9 @@ class KnowledgeTestBot(fp.PoeBot):
 
             yield self.text_event(
                 TEMPLATE_STARTING_REPLY.format(
-                    category=question_info["subject"],
-                    question=question_info["question"],
+                    category=question_info["Category"],
+                    question=question_info["Question"],
                 )
-            )
-
-            yield PartialResponse(
-                text=f"1) {question_info['option_1']}", is_suggested_reply=True
-            )
-            yield PartialResponse(
-                text=f"2) {question_info['option_2']}", is_suggested_reply=True
-            )
-            yield PartialResponse(
-                text=f"3) {question_info['option_3']}", is_suggested_reply=True
-            )
-            yield PartialResponse(
-                text=f"4) {question_info['option_4']}", is_suggested_reply=True
             )
 
             yield PartialResponse(text=PASS_STATEMENT, is_suggested_reply=True)
@@ -148,18 +169,27 @@ class KnowledgeTestBot(fp.PoeBot):
             ProtocolMessage(
                 role="system",
                 content=FREEFORM_SYSTEM_PROMPT.format(
-                    question=question_info["question"],
-                    answer=question_info["answer"] + 1,  # this is zero-indexed
-                    subject=question_info["subject"],
-                    option_1=question_info["option_1"],
-                    option_2=question_info["option_2"],
-                    option_3=question_info["option_3"],
-                    option_4=question_info["option_4"],
+                    syllabus=syllabus_text,
+                    question=question_info["Question"],
+                    answer=question_info["Answer"],
                 ),
             )
         ] + request.query
+
+        if len(request.query) >= 5:
+            # Gemini-Flash just drops the system prompt when the conversation is long
+            request.query = request.query[:-3] + [
+                ProtocolMessage(
+                    role="user",
+                    content=FREEFORM_SYSTEM_PROMPT.format(
+                        syllabus=syllabus_text,
+                        question=question_info["Question"],
+                        answer=question_info["Answer"],
+                    ),
+                )
+            ] + request.query[-3:]
         bot_reply = ""
-        async for msg in fp.stream_request(request, "ChatGPT", request.access_key):
+        async for msg in fp.stream_request(request, "Gemini-1.5-Flash", request.access_key):
             bot_reply += msg.text
             yield msg.model_copy()
         print(bot_reply)
@@ -174,7 +204,7 @@ class KnowledgeTestBot(fp.PoeBot):
             ProtocolMessage(role="user", content=SUGGESTED_REPLIES_USER_PROMPT),
         ]
         response_text = ""
-        async for msg in fp.stream_request(request, "ChatGPT", request.access_key):
+        async for msg in fp.stream_request(request, "Gemini-1.5-Flash", request.access_key):
             response_text += msg.text
         print("suggested_reply", response_text)
 
@@ -187,6 +217,6 @@ class KnowledgeTestBot(fp.PoeBot):
 
     async def get_settings(self, setting: fp.SettingsRequest) -> fp.SettingsResponse:
         return fp.SettingsResponse(
-            server_bot_dependencies={"ChatGPT": 1, "GPT-3.5-Turbo": 1},
+            server_bot_dependencies={"Gemini-1.5-Flash": 2},
             introduction_message="Say 'start' to get a knowledge question.",
         )
