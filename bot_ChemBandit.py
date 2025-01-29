@@ -20,7 +20,7 @@ from modal import Dict
 
 cid_to_current_question: dict[str, dict[str]] = Dict.from_name("dict-ChemBandit-cid_to_current_question", create_if_missing=True)
 uid_to_history: dict[str, tuple[int, str, str]] = Dict.from_name("dict-ChemBandit-uid_to_history", create_if_missing=True)  # for bandit calculation purposes, uid -> id, correctness, response
-uid_to_all_history: dict[str, dict[str, Any]] = Dict.from_name("dict-ChemBandit-uid_to_all_history", create_if_missing=True)  # for logging purposes
+uid_to_all_history: dict[str, list[dict[str, Any]]] = Dict.from_name("dict-ChemBandit-uid_to_all_history2", create_if_missing=True)  # for logging purposes
 
 df = pd.read_csv("questions_and_answers.csv")
 
@@ -134,7 +134,11 @@ class KnowledgeTestBot(fp.PoeBot):
     async def get_response(
         self, request: fp.QueryRequest
     ) -> AsyncIterable[fp.PartialResponse]:
+        history_to_log = {}
         last_user_reply = request.query[-1].content
+        history_to_log["user_id"] = request.user_id
+        history_to_log["conversation_id"] = request.conversation_id
+        history_to_log["last_user_reply"] = last_user_reply
         print(last_user_reply)
 
         # reset if the user passes or asks for the next statement
@@ -159,8 +163,10 @@ class KnowledgeTestBot(fp.PoeBot):
 
         # retrieve the previously cached question
         question_info = cid_to_current_question[request.conversation_id]
+        history_to_log["question_info"] = question_info
+        history_to_log["actual_conversation_history"] = str(request.query)
 
-        # continue as per normal
+        # inject system prompt
         request.query = [
             ProtocolMessage(
                 role="system",
@@ -172,6 +178,7 @@ class KnowledgeTestBot(fp.PoeBot):
             )
         ] + request.query
 
+        # inject system prompt again
         if len(request.query) >= 5:
             # Gemini-Flash just drops the system prompt when the conversation is long
             request.query = request.query[:-3] + [
@@ -184,11 +191,14 @@ class KnowledgeTestBot(fp.PoeBot):
                     ),
                 )
             ] + request.query[-3:]
+        history_to_log["simulated_converation_history"] = str(request.query)
+
         bot_reply = ""
         async for msg in fp.stream_request(request, "Gemini-1.5-Flash", request.access_key):
             bot_reply += msg.text
             yield msg.model_copy()
         print(bot_reply)
+        history_to_log["bot_reply"] = bot_reply
 
         # generate suggested replies
         request.query = request.query + [ProtocolMessage(role="bot", content=bot_reply)]
@@ -205,14 +215,19 @@ class KnowledgeTestBot(fp.PoeBot):
         print("suggested_reply", response_text)
 
         suggested_replies = extract_suggested_replies(response_text)
+        history_to_log["suggested_replies"] = suggested_replies
 
         for suggested_reply in suggested_replies[:3]:
             yield PartialResponse(text=suggested_reply, is_suggested_reply=True)
         yield PartialResponse(text=NEXT_STATEMENT, is_suggested_reply=True)
+
+        all_history = uid_to_all_history.get(request.user_id, [])
+        all_history.append(history_to_log)
+        uid_to_all_history[request.user_id] = all_history
         return
 
     async def get_settings(self, setting: fp.SettingsRequest) -> fp.SettingsResponse:
         return fp.SettingsResponse(
             server_bot_dependencies={"Gemini-1.5-Flash": 2},
-            introduction_message="Say 'start' to get a knowledge question.",
+            introduction_message="Say 'start' to get question in Chemistry.",
         )
