@@ -11,14 +11,16 @@ There are three states in the conversation
 from __future__ import annotations
 
 import re
-from typing import AsyncIterable
+from typing import AsyncIterable, Any
 
 import fastapi_poe as fp
 import pandas as pd
 from fastapi_poe.types import PartialResponse, ProtocolMessage
 from modal import Dict
 
-my_dict = Dict.from_name("dict-KnowledgeTest", create_if_missing=True)
+cid_to_current_question: dict[str, dict[str]] = Dict.from_name("dict-ChemBandit-cid_to_current_question", create_if_missing=True)
+uid_to_history: dict[str, tuple[int, str, str]] = Dict.from_name("dict-ChemBandit-uid_to_history", create_if_missing=True)  # for bandit calculation purposes, uid -> id, correctness, response
+uid_to_all_history: dict[str, dict[str, Any]] = Dict.from_name("dict-ChemBandit-uid_to_all_history", create_if_missing=True)  # for logging purposes
 
 df = pd.read_csv("questions_and_answers.csv")
 
@@ -118,38 +120,32 @@ def stringify_conversation(messages: list[ProtocolMessage]) -> str:
 
     # Gemini-Flash just suggests nonsense the conversation is too long
     for message in messages[::-1][:5][::-1]:
-        # NB: system prompt is intentionally excluded
         if message.role == "system":
             stringified_messages += f"System: {message.content}\n\n"
         elif message.role == "bot":
             stringified_messages += f"Teacher: {message.content}\n\n"
         else:
+            # NB: as commit the system prompt is injected somewhere in the user prompt
             stringified_messages += f"Student: {message.content}\n\n"
     return stringified_messages
-
-
-def get_conversation_info_key(conversation_id):
-    assert conversation_id.startswith("c")
-    return f"KnowledgeTest-question-{conversation_id}"
 
 
 class KnowledgeTestBot(fp.PoeBot):
     async def get_response(
         self, request: fp.QueryRequest
     ) -> AsyncIterable[fp.PartialResponse]:
-        conversation_info_key = get_conversation_info_key(request.conversation_id)
         last_user_reply = request.query[-1].content
         print(last_user_reply)
 
         # reset if the user passes or asks for the next statement
         if last_user_reply in (NEXT_STATEMENT, PASS_STATEMENT):
-            if conversation_info_key in my_dict:
-                my_dict.pop(conversation_info_key)
+            if request.conversation_id in cid_to_current_question:
+                cid_to_current_question.pop(request.conversation_id)
 
         # for new conversations, sample a problem
-        if conversation_info_key not in my_dict:
-            question_info = df.sample(n=1).to_dict(orient="records")[0]
-            my_dict[conversation_info_key] = question_info
+        if request.conversation_id not in cid_to_current_question:
+            question_info: dict[str] = df.sample(n=1).to_dict(orient="records")[0]
+            cid_to_current_question[request.conversation_id] = question_info
 
             yield self.text_event(
                 TEMPLATE_STARTING_REPLY.format(
@@ -162,7 +158,7 @@ class KnowledgeTestBot(fp.PoeBot):
             return
 
         # retrieve the previously cached question
-        question_info = my_dict[conversation_info_key]
+        question_info = cid_to_current_question[request.conversation_id]
 
         # continue as per normal
         request.query = [
