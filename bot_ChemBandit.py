@@ -16,20 +16,37 @@ from typing import AsyncIterable, Any
 import fastapi_poe as fp
 import pandas as pd
 import io
+import math
+import random
 from fastapi_poe.types import PartialResponse, ProtocolMessage
 from modal import Dict
 from datetime import datetime
 import pytz
+from collections import defaultdict
 
 cid_to_current_question: dict[str, dict[str]] = Dict.from_name("dict-ChemBandit-cid_to_current_question", create_if_missing=True)
 cid_to_has_submission_made: dict[str, bool] = Dict.from_name("dict-ChemBandit-cid_to_has_submission_made", create_if_missing=True)  # just to annotate the answer rows
 uid_to_history: dict[str, tuple[int, str, str]] = Dict.from_name("dict-ChemBandit-uid_to_history", create_if_missing=True)  # for bandit calculation purposes, uid -> id, correctness, response
-uid_to_all_history: dict[str, list[dict[str, Any]]] = Dict.from_name("dict-ChemBandit-uid_to_all_history5", create_if_missing=True)  # for logging purposes
+uid_to_all_history: dict[str, list[dict[str, Any]]] = Dict.from_name("dict-ChemBandit-uid_to_all_history6", create_if_missing=True)  # for logging purposes
 
 df = pd.read_csv("questions_and_answers.csv")
 
 pst = pytz.timezone('America/Los_Angeles')  # PST
 sgt = pytz.timezone('Asia/Singapore')       # Singapore Time
+
+# for bandit use
+id_to_id_to_weight = defaultdict(lambda: defaultdict(float))
+id_to_question_info = {}
+
+for record_1 in df.to_dict(orient="records"):
+    id_to_question_info[record_1["id"]] = record_1
+    for record_2 in df.to_dict(orient="records"):
+        if record_1["learning_outcome"] == record_2["learning_outcome"]:
+            id_to_id_to_weight[record_1["id"]][record_2["id"]] += 1
+        if record_1["tags"] == record_2["tags"]:
+            id_to_id_to_weight[record_1["id"]][record_2["id"]] += 0.1
+        if record_1["term"] == record_2["term"]:
+            id_to_id_to_weight[record_1["id"]][record_2["id"]] += 0.01
 
 with open("syllabus.txt") as f:
     syllabus_text = f.read()
@@ -76,6 +93,7 @@ Strongly prefer nomenclature and concepts that are found in the syllabus or the 
 Use unicode characters (e.g. ₂) instead of HTML tags (e.g. <sub>2</sub>) for subscripts.
 Refer to the glossary of terms to determine whether the student has sufficiently answered the question. (But do not mention "glossary of terms")
 Make sure the student is actually answering the question, and not just copying answers without adapting to the context.
+Consider the answer totally incorrect (instead of partially incorrect) if it only mentions facts that are totally irrelevant.
 
 Reply in this format:
 
@@ -113,6 +131,8 @@ PASS_STATEMENT = "I will pass this question."
 NEXT_STATEMENT = "I want another question."
 
 HISTORY_STATEMENT = "history"
+
+RESET_STATEMENT = "reset"
 
 SUGGESTED_REPLIES_REGEX = re.compile(r"<a>(.+?)</a>", re.DOTALL)
 
@@ -163,6 +183,12 @@ class KnowledgeTestBot(fp.PoeBot):
             all_history = uid_to_all_history[request.user_id]
             df_history = pd.DataFrame(all_history)
 
+            # dropping columns
+            if "actual_conversation_history" in df_history.columns:
+                df_history = df_history.drop("actual_conversation_history", axis=1)
+            if "simulated_converation_history" in df_history.columns:
+                df_history = df_history.drop("simulated_converation_history", axis=1)
+
             buffer = io.BytesIO()
             df_history.to_csv(buffer, index=False)
             file_data = buffer.getvalue()
@@ -185,16 +211,20 @@ class KnowledgeTestBot(fp.PoeBot):
             _ = await self.post_message_attachment(
                 message_id=request.message_id,
                 file_data=file_data,
-                filename="history.csv",
+                filename="history_truncated.csv",
             )
 
             # make this look nice if you want
             html_table = df_truncated.to_html(index=False)
             yield self.text_event(f"```html\n<html>\n{html_table}\n</html>\n```")
+            yield PartialResponse(text=PASS_STATEMENT, is_suggested_reply=True)
             return
 
+        if last_user_reply == RESET_STATEMENT and request.user_id in uid_to_all_history:
+            uid_to_all_history.pop(request.user_id)
+
         # reset if the user passes or asks for the next statement
-        if last_user_reply in (NEXT_STATEMENT, PASS_STATEMENT):
+        if last_user_reply in (NEXT_STATEMENT, PASS_STATEMENT, RESET_STATEMENT):
             if request.conversation_id in cid_to_current_question:
                 cid_to_current_question.pop(request.conversation_id)
             if request.conversation_id in cid_to_has_submission_made:
@@ -202,7 +232,64 @@ class KnowledgeTestBot(fp.PoeBot):
 
         # for new conversations, sample a problem
         if request.conversation_id not in cid_to_current_question:
-            question_info: dict[str] = df.sample(n=1).to_dict(orient="records")[0]
+            id_to_numerator = {id_: 0.01 for id_ in df["id"]}
+            id_to_denominator = {id_: 0.02 for id_ in df["id"]}
+            id_to_attempts = {id_: 0 for id_ in df["id"]}
+            total_attempts = 1
+            all_history = uid_to_all_history.get(request.user_id, [])
+            most_recent_id = None
+            for history in all_history:
+                if "correctness" not in history:
+                    continue
+                if history["correctness"] is None:
+                    continue
+                if history["correctness"] == "Correct":
+                    for id_to_populate, weight in id_to_id_to_weight[history["id"]].items():
+                        id_to_numerator[id_to_populate] += 0
+                        id_to_denominator[id_to_populate] += weight
+                        id_to_attempts[id_to_populate] += 1
+                    total_attempts += 1
+                elif history["correctness"] == "Partially Correct":
+                    for id_to_populate, weight in id_to_id_to_weight[history["id"]].items():
+                        id_to_numerator[id_to_populate] += weight / 2
+                        id_to_denominator[id_to_populate] += weight
+                        id_to_attempts[id_to_populate] += 1
+                    total_attempts += 1
+                elif history["correctness"] == "Inorrect":
+                    for id_to_populate, weight in id_to_id_to_weight[history["id"]].items():
+                        id_to_numerator[id_to_populate] += weight
+                        id_to_denominator[id_to_populate] += weight
+                        id_to_attempts[id_to_populate] += 1
+                    total_attempts += 1
+                most_recent_id = history["id"]
+
+            best_id = df.to_dict(orient="records")[0]["id"]
+            best_score = -100
+            for candidate_question_info in df.to_dict(orient="records"):
+                candidate_id = candidate_question_info["id"]
+                if candidate_id == most_recent_id:
+                    # don't show two exact question at once
+                    continue
+                mean = id_to_numerator[candidate_id] / id_to_denominator[candidate_id]
+                c = 0.01
+                score = (
+                    mean
+                    + c * math.sqrt(math.log(total_attempts) / id_to_denominator[candidate_id])
+                    + 0.0001 * random.randint(0, 1)  # some uncertainty
+                )
+                if score > best_score:
+                    best_score = score
+                    best_id = candidate_id
+
+            history_to_log["numerator"] = id_to_numerator[best_id]
+            history_to_log["denominator"] = id_to_denominator[best_id]
+            history_to_log["mean"] = id_to_numerator[best_id] / id_to_denominator[best_id]
+            history_to_log["score"] = best_score
+
+            question_info = id_to_question_info[best_id]
+            for key, value in question_info.items():
+                history_to_log[key] = value
+            history_to_log["correctness"] = None
             cid_to_current_question[request.conversation_id] = question_info
 
             yield self.text_event(
@@ -213,6 +300,9 @@ class KnowledgeTestBot(fp.PoeBot):
             )
 
             yield PartialResponse(text=PASS_STATEMENT, is_suggested_reply=True)
+            all_history = uid_to_all_history.get(request.user_id, [])
+            all_history.append(history_to_log)
+            uid_to_all_history[request.user_id] = all_history
             return
 
         # retrieve the previously cached question
