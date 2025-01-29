@@ -22,8 +22,9 @@ from datetime import datetime
 import pytz
 
 cid_to_current_question: dict[str, dict[str]] = Dict.from_name("dict-ChemBandit-cid_to_current_question", create_if_missing=True)
+cid_to_has_submission_made: dict[str, bool] = Dict.from_name("dict-ChemBandit-cid_to_has_submission_made", create_if_missing=True)  # just to annotate the answer rows
 uid_to_history: dict[str, tuple[int, str, str]] = Dict.from_name("dict-ChemBandit-uid_to_history", create_if_missing=True)  # for bandit calculation purposes, uid -> id, correctness, response
-uid_to_all_history: dict[str, list[dict[str, Any]]] = Dict.from_name("dict-ChemBandit-uid_to_all_history4", create_if_missing=True)  # for logging purposes
+uid_to_all_history: dict[str, list[dict[str, Any]]] = Dict.from_name("dict-ChemBandit-uid_to_all_history5", create_if_missing=True)  # for logging purposes
 
 df = pd.read_csv("questions_and_answers.csv")
 
@@ -172,7 +173,10 @@ class KnowledgeTestBot(fp.PoeBot):
                 filename="history.csv",
             )
  
-            df_truncated = df_history[["learning_outcome", "question", "reference_answer", "last_user_reply"]]
+            df_truncated = df_history[["learning_outcome", "question", "reference_answer", "last_user_reply", "correctness"]]
+            df_truncated = df_truncated[~df_truncated["correctness"].isna()]
+            if len(df_truncated) == 0:
+                return
 
             buffer = io.BytesIO()
             df_truncated.to_csv(buffer, index=False)
@@ -193,6 +197,8 @@ class KnowledgeTestBot(fp.PoeBot):
         if last_user_reply in (NEXT_STATEMENT, PASS_STATEMENT):
             if request.conversation_id in cid_to_current_question:
                 cid_to_current_question.pop(request.conversation_id)
+            if request.conversation_id in cid_to_has_submission_made:
+                cid_to_has_submission_made.pop(request.conversation_id)
 
         # for new conversations, sample a problem
         if request.conversation_id not in cid_to_current_question:
@@ -249,6 +255,19 @@ class KnowledgeTestBot(fp.PoeBot):
             yield msg.model_copy()
         print(bot_reply)
         history_to_log["bot_reply"] = bot_reply
+
+        # log correctness judgement
+        history_to_log["correctness"] = None
+        if request.conversation_id not in cid_to_has_submission_made:
+            if "Your answer is incorrect" in bot_reply:
+                history_to_log["correctness"] = "Incorrect"
+                cid_to_has_submission_made[request.conversation_id] = True
+            elif "Your answer is partially correct" in bot_reply:
+                history_to_log["correctness"] = "Partially Correct"
+                cid_to_has_submission_made[request.conversation_id] = True
+            elif "Your answer is correct" in bot_reply:
+                history_to_log["correctness"] = "Correct"
+                cid_to_has_submission_made[request.conversation_id] = True
 
         # generate suggested replies
         request.query = request.query + [ProtocolMessage(role="bot", content=bot_reply)]
