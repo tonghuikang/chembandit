@@ -15,20 +15,26 @@ from typing import AsyncIterable, Any
 
 import fastapi_poe as fp
 import pandas as pd
+import io
 from fastapi_poe.types import PartialResponse, ProtocolMessage
 from modal import Dict
+from datetime import datetime
+import pytz
 
 cid_to_current_question: dict[str, dict[str]] = Dict.from_name("dict-ChemBandit-cid_to_current_question", create_if_missing=True)
 uid_to_history: dict[str, tuple[int, str, str]] = Dict.from_name("dict-ChemBandit-uid_to_history", create_if_missing=True)  # for bandit calculation purposes, uid -> id, correctness, response
-uid_to_all_history: dict[str, list[dict[str, Any]]] = Dict.from_name("dict-ChemBandit-uid_to_all_history2", create_if_missing=True)  # for logging purposes
+uid_to_all_history: dict[str, list[dict[str, Any]]] = Dict.from_name("dict-ChemBandit-uid_to_all_history4", create_if_missing=True)  # for logging purposes
 
 df = pd.read_csv("questions_and_answers.csv")
+
+pst = pytz.timezone('America/Los_Angeles')  # PST
+sgt = pytz.timezone('Asia/Singapore')       # Singapore Time
 
 with open("syllabus.txt") as f:
     syllabus_text = f.read()
 
 TEMPLATE_STARTING_REPLY = """
-Category: **{category}**
+Learning outcome: **{learning_outcome}**
 
 {question}
 """.strip()
@@ -50,7 +56,7 @@ This is the question
 
 The reference answer is
 <reference_answer>
-{answer}
+{reference_answer}
 </reference_answer>
 
 The student is expected to reply with the answer.
@@ -105,6 +111,8 @@ PASS_STATEMENT = "I will pass this question."
 
 NEXT_STATEMENT = "I want another question."
 
+HISTORY_STATEMENT = "history"
+
 SUGGESTED_REPLIES_REGEX = re.compile(r"<a>(.+?)</a>", re.DOTALL)
 
 
@@ -139,7 +147,47 @@ class KnowledgeTestBot(fp.PoeBot):
         history_to_log["user_id"] = request.user_id
         history_to_log["conversation_id"] = request.conversation_id
         history_to_log["last_user_reply"] = last_user_reply
+
+        utc_now = datetime.now(pytz.utc)
+        pst_time = utc_now.astimezone(pst).strftime('%Y-%m-%d %I:%M:%S %p')
+        sgt_time = utc_now.astimezone(sgt).strftime('%Y-%m-%d %I:%M:%S %p')
+        history_to_log["utc_now"] = utc_now
+        history_to_log["pst_time"] = pst_time
+        history_to_log["sgt_time"] = sgt_time
+
         print(last_user_reply)
+
+        if last_user_reply == HISTORY_STATEMENT and request.user_id in uid_to_all_history:
+            # If you want to get history from all users either read from `modal dict` or implement a backdoor
+            all_history = uid_to_all_history[request.user_id]
+            df_history = pd.DataFrame(all_history)
+
+            buffer = io.BytesIO()
+            df_history.to_csv(buffer, index=False)
+            file_data = buffer.getvalue()
+
+            _ = await self.post_message_attachment(
+                message_id=request.message_id,
+                file_data=file_data,
+                filename="history.csv",
+            )
+ 
+            df_truncated = df_history[["learning_outcome", "question", "reference_answer", "last_user_reply"]]
+
+            buffer = io.BytesIO()
+            df_truncated.to_csv(buffer, index=False)
+            file_data = buffer.getvalue()
+
+            _ = await self.post_message_attachment(
+                message_id=request.message_id,
+                file_data=file_data,
+                filename="history.csv",
+            )
+
+            # make this look nice if you want
+            html_table = df_truncated.to_html(index=False)
+            yield self.text_event(f"```html\n<html>\n{html_table}\n</html>\n```")
+            return
 
         # reset if the user passes or asks for the next statement
         if last_user_reply in (NEXT_STATEMENT, PASS_STATEMENT):
@@ -153,8 +201,8 @@ class KnowledgeTestBot(fp.PoeBot):
 
             yield self.text_event(
                 TEMPLATE_STARTING_REPLY.format(
-                    category=question_info["Category"],
-                    question=question_info["Question"],
+                    learning_outcome=question_info["learning_outcome"],
+                    question=question_info["question"],
                 )
             )
 
@@ -164,6 +212,8 @@ class KnowledgeTestBot(fp.PoeBot):
         # retrieve the previously cached question
         question_info = cid_to_current_question[request.conversation_id]
         history_to_log["question_info"] = question_info
+        for key, value in question_info.items():
+            history_to_log[key] = value
         history_to_log["actual_conversation_history"] = str(request.query)
 
         # inject system prompt
@@ -172,8 +222,8 @@ class KnowledgeTestBot(fp.PoeBot):
                 role="system",
                 content=FREEFORM_SYSTEM_PROMPT.format(
                     syllabus=syllabus_text,
-                    question=question_info["Question"],
-                    answer=question_info["Answer"],
+                    question=question_info["question"],
+                    reference_answer=question_info["reference_answer"],
                 ),
             )
         ] + request.query
@@ -186,8 +236,8 @@ class KnowledgeTestBot(fp.PoeBot):
                     role="user",
                     content=FREEFORM_SYSTEM_PROMPT.format(
                         syllabus=syllabus_text,
-                        question=question_info["Question"],
-                        answer=question_info["Answer"],
+                        question=question_info["question"],
+                        reference_answer=question_info["reference_answer"],
                     ),
                 )
             ] + request.query[-3:]

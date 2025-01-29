@@ -1,4 +1,4 @@
-id,Question,Answer,Category,General Category,Type
+id,question,reference_answer,learning_outcome,tags,term
 0,Explain why alkanes are generally unreactive.,"Alkanes lack electron-rich sites to attract electrophiles and electron-deficient sites to attract nucleophiles. Additionally, their strong C-C and C-H bonds require a significant amount of energy to break.",Alkane Reactivity,Reactivity,Explain
 1,Explain why saturated hydrocarbons are relatively inert.,Saturated hydrocarbons have strong sigma bonds and no functional groups to readily participate in chemical reactions. The lack of polarity in C-H bonds also reduces reactivity.,Alkane Reactivity,Reactivity,Explain
 2,Discuss the chemical inertness of straight-chain alkanes.,"Straight-chain alkanes exhibit low reactivity due to the absence of polar bonds and the stability of their C-H and C-C bonds, which require significant energy to break.",Alkane Reactivity,Reactivity,Discuss
